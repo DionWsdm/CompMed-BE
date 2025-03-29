@@ -31,6 +31,11 @@ app.use(bodyParser.json());
 app.use("/login", authRoute);
 app.use("/posts", postinganRoute);
 app.use("/register", userRoute);
+app.get("/", (req: Request, res: Response) => {
+    res.json({
+        message: "Succesfull connection",
+    })
+})
 
 const server = http.createServer(app);
 
