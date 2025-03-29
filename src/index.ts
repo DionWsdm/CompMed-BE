@@ -33,7 +33,7 @@ app.use("/posts", postinganRoute);
 app.use("/register", userRoute);
 app.get("/", (req: Request, res: Response) => {
     res.json({
-        message: "Succesfull connection",
+        message: process.env.DB_HOST,
     })
 })
 
