@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.use("/login", authRoute);
 app.use("/posts", postinganRoute);
 app.use("/register", userRoute);
+app.use("/user", userRoute)
 app.get("/", (req: Request, res: Response) => {
     res.json({
         message: process.env.DB_HOST,

@@ -21,7 +21,16 @@ const getUser = async (req: Request, res: Response) =>
     })
 }
 
+const getAllUser = (req: Request, res: Response) =>
+{
+    const user = await userModel.getAllUser();
+    res.json({
+        users: user
+    })
+}
+
 export default {
     createUser,
     getUser,
+    getAllUser,
 }

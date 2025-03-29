@@ -18,6 +18,12 @@ const getUserByUsername = async (username: string) =>
     return user;
 }
 
+const getAllUser = async () =>
+{
+    const users = await db("users").select();
+    return users;
+}
+
 const updateUser = async () =>
 {
 
@@ -31,6 +37,7 @@ const deleteUser = async () =>
 export default {
     createUser,
     getUser,
+    getAllUser,
     getUserByUsername,
     updateUser,
     deleteUser,
