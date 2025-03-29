@@ -29,9 +29,9 @@ const login = async (req: Request, res: Response) =>
         res.cookie("sessionid", sessionID, {
             path: "/",
             maxAge: 1000 * 60 * 60 * 24,
-            httpOnly: true,           
-            secure: true,
-            sameSite: "none",
+            httpOnly: Boolean(Number(process.env.HTTPONLY)),           
+            secure: Boolean(Number(process.env.SECURE)),
+            sameSite: (process.env.DB_HOST === "localhost") ? "lax" : "none",
         })
         res.json({
             message: "login success",
