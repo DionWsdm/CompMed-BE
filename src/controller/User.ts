@@ -21,7 +21,7 @@ const getUser = async (req: Request, res: Response) =>
     })
 }
 
-const getAllUser = (req: Request, res: Response) =>
+const getAllUser = async (req: Request, res: Response) =>
 {
     const user = await userModel.getAllUser();
     res.json({
