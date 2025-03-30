@@ -34,6 +34,7 @@ const login = async (req: Request, res: Response) =>
             httpOnly: !status,           
             secure: !status,
             sameSite: status ? "lax" : "none",
+            partitioned: !status,
         })
         res.json({
             message: "login success",
