@@ -53,23 +53,26 @@ const login = async (req: Request, res: Response) =>
         res.json({
             message: "Username atau Password salah",
             success: false,
-        })
+        });
 }
 
 const getAuthInfo = async (req: Request, res: Response) =>
 {
-    const sessionid = req.headers.cookie?.substring(10) || null;
+    const sessionid = req.headers.cookie?.substring(10);
     console.log(sessionid)
     if (sessionid)
     { 
         const authInfo = await authModel.getAuthInfo(sessionid);
-        res.json({
+        const response = {
             authInfo: authInfo,
-        })
+        }
+        console.log(response.authInfo)
+        res.json(response)
     }
     else
     {
         res.status(401).json({
+            authInfo: false,
             message: "Unauthorized, please sign in first."
         })
     }
