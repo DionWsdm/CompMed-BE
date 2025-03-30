@@ -15,7 +15,7 @@ const PORT = process.env.PORT;
 
 const app = express();
 app.use(cors({
-    origin: process.env.FE_URL,
+    origin: "https://comp-med-be-dion-wisdom-ps-projects.vercel.app",
     credentials: true,
 }));
 

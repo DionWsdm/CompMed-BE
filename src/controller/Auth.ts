@@ -2,7 +2,14 @@ import { Request, Response } from "express"
 import authModel from "../models/Auth"
 import userModel from "../models/User"
 import {v4 as uuidv4} from 'uuid';
-import session from "express-session";
+import jwt from "jsonwebtoken";
+
+const generateToken = (userid: number, username: string) =>
+{
+    return jwt.sign({"userid": userid, "username": username }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "24h",
+    })
+}
 
 const login = async (req: Request, res: Response) => 
 {
