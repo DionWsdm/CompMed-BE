@@ -32,17 +32,17 @@ const login = async (req: Request, res: Response) =>
                 sessionID = uuidv4();
                 await authModel.login(user, sessionID);
             }
+            const status = (process.env.DB_HOST === "localhost") 
+            console.log(status, !status)
+            res.cookie("sessionid", sessionID, {
+                path: "/",
+                maxAge: 1000 * 60 * 60 * 24,
+                httpOnly: !status,           
+                secure: !status,
+                sameSite: status ? "lax" : "none",
+                partitioned: !status,
+            })
         }
-        const status = (process.env.DB_HOST === "localhost") 
-        console.log(status, !status)
-        res.cookie("sessionid", sessionID, {
-            path: "/",
-            maxAge: 1000 * 60 * 60 * 24,
-            httpOnly: !status,           
-            secure: !status,
-            sameSite: status ? "lax" : "none",
-            partitioned: !status,
-        })
         res.json({
             message: "login success",
             success: true,
