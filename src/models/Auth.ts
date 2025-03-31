@@ -1,5 +1,5 @@
 import db from '../data/db';
-import User from 'data/User';
+import User from '@Types/User';
 
 const login = async (user: User, sessionid: string) =>
 {
