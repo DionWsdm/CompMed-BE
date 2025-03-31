@@ -1,7 +1,7 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import userModel from '../models/User';
-import User from '../data/User';
+import User from '../@Types/User';
 
 const createUser = async (req: Request, res: Response) =>
 {
