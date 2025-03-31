@@ -1,5 +1,5 @@
 import db from '../data/db';
-import Post from '../data/Postingan';
+import Post from '../@Types/Postingan';
 import { Response } from 'express';
 
 const createPostingan = async (postingan: Post) =>
