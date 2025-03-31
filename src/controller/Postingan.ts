@@ -11,6 +11,7 @@ const createPostingan = async (req: Request, res: Response) =>
     await postinganModel.createPostingan(req.body);
     res.status(201).json({
         message: `Berhasil membuat post untuk userid = ${req.body.userid}`,
+        newPostingan: req.body,
     })
 }
 
