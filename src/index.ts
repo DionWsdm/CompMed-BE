@@ -9,6 +9,7 @@ import userRoute from './route/User';
 import postinganRoute from './route/Postingan';
 import authRoute from './route/Auth';
 import commentRoute from './route/Comment';
+import likeRoute from './route/Like';
 import { Request, Response, NextFunction } from 'express';
 
 dotenv.config()
@@ -29,8 +30,9 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.use("/comments", commentRoute)
+app.use("/likes", likeRoute);
 app.use("/login", authRoute);
+app.use("/comments", commentRoute)
 app.use("/posts", postinganRoute);
 app.use("/register", userRoute);
 app.use("/user", userRoute)
