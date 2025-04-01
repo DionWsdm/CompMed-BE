@@ -14,3 +14,5 @@ router.patch("/:id", commentController.updateComment)
 
 // DELETE - Hapus Comment
 router.delete("/:id", commentController.deleteComment)
+
+export default router;
