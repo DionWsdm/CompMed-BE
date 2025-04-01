@@ -1,4 +1,3 @@
-import express from 'express';
 import config from '../config/knexfile';
 import knex, { Knex } from 'knex';
 
