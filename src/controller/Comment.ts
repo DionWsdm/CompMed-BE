@@ -8,6 +8,7 @@ const createComment = async (req: express.Request, res: express.Response) =>
     req.body.userid = authInfo.userid;
     req.body.username = authInfo.username;
     req.body.created_at = new Date();
+    req.body.postid = req.params.postid;
     await commentModel.createComment(req.body);
     res.status(201).json({
         message: "Berhasil membuat komentar",
