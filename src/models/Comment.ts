@@ -1,9 +1,11 @@
 import db from '../data/db'
 import express from 'express'
+import Comment from '@Types/Comment';
 
 const createComment = async (comment: Comment) =>
 {
     await db("comments").insert(comment);
+    await db("posts").where("id", comment.postid).increment("comments", 1);
 }
 
 const getComment = async (id: number) =>
@@ -20,7 +22,7 @@ const getCommentByPostId = async (postid: number) =>
 
 const updateComment = (req: express.Request, res: express.Response) =>
 {
-
+    
 }
 
 const deleteComment = async (id: number, userid: number) =>
@@ -29,6 +31,7 @@ const deleteComment = async (id: number, userid: number) =>
     if (comment.userid != userid || !comment)
         return false;
     await db("comments").where("id", id).delete();
+    await db("posts").where("postid", comment.postid).decrement("comments", 1);
     return true;
 }
 
