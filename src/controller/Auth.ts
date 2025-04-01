@@ -23,26 +23,21 @@ const login = async (req: Request, res: Response) =>
         })
     else if (user.pwd === password)
     {
-        let sessionID = req.headers.cookie?.substring(10) || null;
+        let sessionID = (await authModel.getSessionIdByUsername(username))?.sessionid;
         if (!sessionID)
         {
-            sessionID = (await authModel.getSessionIdByUsername(username))?.sessionid;
-            if (!sessionID)
-            {
-                sessionID = uuidv4();
-                await authModel.login(user, sessionID);
-            }
-            const status = (process.env.DB_HOST === "localhost") 
-            console.log(status, !status)
-            res.cookie("sessionid", sessionID, {
-                path: "/",
-                maxAge: 1000 * 60 * 60 * 24,
-                httpOnly: !status,           
-                secure: !status,
-                sameSite: status ? "lax" : "none",
-                partitioned: !status,
-            })
+            sessionID = uuidv4();
+            await authModel.login(user, sessionID);
         }
+        const status = (process.env.DB_HOST === "localhost") 
+        res.cookie("sessionid", sessionID, {
+            path: "/",
+            maxAge: 1000 * 60 * 60 * 24,
+            httpOnly: !status,           
+            secure: !status,
+            sameSite: status ? "lax" : "none",
+            partitioned: !status,
+        })
         res.json({
             message: "login success",
             success: true,
