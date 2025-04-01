@@ -1,4 +1,4 @@
-import db from 'data/db'
+import db from '../data/db'
 import express from 'express'
 
 const createComment = async (comment: Comment) =>
