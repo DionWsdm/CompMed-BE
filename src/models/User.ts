@@ -3,7 +3,16 @@ import User from '../@Types/User';
 
 const createUser = async (user: User) => 
 {
-    await db("users").insert(user)
+    try
+    {
+        await db("users").insert(user);
+        return true;
+    }
+    catch (error)
+    {
+        console.log(error);
+        return false;
+    }  
 }
 
 const getUser = async (userId: number) => 

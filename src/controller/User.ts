@@ -6,10 +6,16 @@ import User from '../@Types/User';
 const createUser = async (req: Request, res: Response) =>
 {
     const user: User = req.body as User
-    await userModel.createUser(user);
-    res.json({
-        message: "Berhasil membuat user",
-    })
+    const success = await userModel.createUser(user);
+    console.log(success)
+    if (success)
+        res.json({
+            message: "Berhasil membuat user",
+        })
+    else
+        res.status(409).json({
+            message: "Email atau username sudah digunakan",
+        })
 }
 
 const getUser = async (req: Request, res: Response) => 
