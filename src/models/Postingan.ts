@@ -7,9 +7,9 @@ const createPostingan = async (postingan: Post) =>
     await db("posts").insert(postingan);
 }
 
-const getPostingan = async (postId: number) =>
+const getPostingan = async (id: number) =>
 {
-    const [postingan] = await db("posts").where("id", postId).select()
+    const [postingan] = await db("posts").where("id", id).select()
     return postingan;
 }
 
@@ -21,13 +21,13 @@ const getUserPostingan = async (userid: Number) =>
 
 const getAllPostingan = async () =>
 {
-    const postingans = await db("posts").select("*");
+    const postingans = await db("posts").orderBy("created_at").select("*");
     return postingans.reverse();
 }
 
-const updatePostingan = async (id: Number, userid: Number, changes: Record<string, string>, res: Response) =>
+const updatePostingan = async (id: number, userid: number, changes: Record<string, string>, res: Response, admin: boolean = false) =>
 {
-    const [postingan] = await db("posts").where("id", id).select();
+    const postingan = await getPostingan(id);
     if (!postingan)
         res.status(404).json({
             message: "Postingan tidak ditemukan."
