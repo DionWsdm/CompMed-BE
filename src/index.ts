@@ -3,11 +3,12 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
-import cors from 'cors'
+import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoute from './route/User';
 import postinganRoute from './route/Postingan';
 import authRoute from './route/Auth';
+import commentRoute from './route/Comment';
 import { Request, Response, NextFunction } from 'express';
 
 dotenv.config()
@@ -28,6 +29,7 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+app.use("/comments", commentRoute)
 app.use("/login", authRoute);
 app.use("/posts", postinganRoute);
 app.use("/register", userRoute);
