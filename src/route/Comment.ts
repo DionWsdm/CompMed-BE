@@ -4,7 +4,7 @@ import commentController from  '../controller/Comment';
 const router = express.Router();
 
 // CREATE - Membuat Comment
-router.post("/", commentController.createComment)
+router.post("/:postid", commentController.createComment)
 
 // READ - Lihat Comment
 router.get("/:postid", commentController.getCommentByPostId)
