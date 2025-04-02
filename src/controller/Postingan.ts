@@ -69,7 +69,7 @@ const getAllPostingan = async (req: Request, res: Response) =>
 
 const updatePostingan = async (req: Request, res: Response) => 
 {
-    const userid = (await authModel.getAuthInfo(req.headers.cookie)).userid;
+    const userid = (await authModel.getAuthInfo(req.headers.cookie?.substring(10))).userid;
     await postinganModel.updatePostingan(Number(req.params.id), userid, req.body, res);
     res.json({
         message: "Berhasil mengupdate postingan.",
@@ -78,10 +78,10 @@ const updatePostingan = async (req: Request, res: Response) =>
 
 const deletePostingan = async (req: Request, res: Response) =>
 {
-    const userid = await authModel.getAuthInfo(req.headers.cookie);
-    if (await postinganModel.deletePostingan(Number(req.params.id), userid, res))
+    const authInfo = await authModel.getAuthInfo(req.headers.cookie?.substring(10));
+    if (await postinganModel.deletePostingan(Number(req.params.id), authInfo.userid, res))
         res.json({
-            message: "Berhasil menghapus postingan."
+            message: "Berhasil menghapus postingan.",
         })
 }
 

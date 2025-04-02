@@ -46,7 +46,7 @@ const deletePostingan = async (id: Number, userid: Number, res: Response) =>
         res.status(404).json({
             message: "Postingan tidak ditemukan."
         });
-    else if (postingan.userid != userid)
+    else if (postingan.userid !== userid)
         res.status(403).json({
             message: "Anda tidak memiliki izin untuk menghapus post ini!"
         });
