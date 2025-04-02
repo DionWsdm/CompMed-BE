@@ -7,7 +7,8 @@ const router = express.Router();
 router.post("/:postid", likeController.addLike)
 
 // GET - GET LIKE
-router.get("/:postid", likeController.getLikeCount)
+router.get("/:userid/:postid", likeController.getLikeByUserAndPostId)
+router.get("/", likeController.getUserLikedPost)
 
 // DELETE - UNLIKE
 router.delete("/:postid", likeController.deleteLike)
